@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeviceTracker : MonoBehaviour
+[RequireComponent(typeof(InputManager))]
+public abstract class DeviceTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected InputManager im;
+    protected InputData data;
+    protected bool newData;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        im = GetComponent<InputManager>();
+        data = new InputData(im.buttonCount);
     }
 }

@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Range(1,5)]public int buttonCount;
+    public void PassInput(InputData data)
     {
-        
+        //Aqui se pone la accion
+    }
+}
+
+public struct InputData
+{
+    public bool[] buttons;
+
+    public InputData(int buttonCount)
+    {
+        buttons = new bool[buttonCount];
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Reset()
     {
-        
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i] = false;
+        }
     }
+
 }
