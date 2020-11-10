@@ -5,9 +5,12 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [Range(1,5)]public int buttonCount;
+
+    public Controller controller;
+
     public void PassInput(InputData data)
     {
-        //Aqui se pone la accion
+        controller.ReadInput(data);
     }
 }
 
