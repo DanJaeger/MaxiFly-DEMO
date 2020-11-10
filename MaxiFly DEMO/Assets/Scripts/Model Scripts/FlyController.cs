@@ -6,7 +6,7 @@ public class FlyController : Controller
 {
     Vector2 playerVelocity;
     public float impulsePower = 2f;
-    public float gravity = 2;
+    public float fallMultiplier = 2f;
 
     public override void ReadInput(InputData data)
     {
@@ -14,7 +14,7 @@ public class FlyController : Controller
 
         if (data.buttons[0])
         {
-            playerVelocity.y += impulsePower;
+            playerVelocity += Vector2.up * impulsePower;
         }
         newInput = true;
 
@@ -24,9 +24,10 @@ public class FlyController : Controller
     {
         if (!newInput)
         {
-            playerVelocity = Vector2.zero;
-            rb.gravityScale = gravity;
+            playerVelocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
+        Mathf.Clamp(playerVelocity.y, -7f, 7f);
+        Debug.Log(rb.velocity);
         rb.velocity = playerVelocity;
         newInput = false;
     }
